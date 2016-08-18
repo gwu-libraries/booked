@@ -1,0 +1,23 @@
+table.reservations {
+	border-collapse: separate;
+	width: 100%;
+	font-size: 10pt;
+	table-layout: fixed;
+}
+
+#reservations-left {
+	display:none;
+	width:0;
+}
+
+#reservations {
+	margin-left:0;
+}
+
+#schedule-actions {
+	display:none;
+}
+
+#header {
+	display:none;
+}

@@ -1,0 +1,2 @@
+<?php
+$langOverrides['ParticipantList'] = 'Notify';

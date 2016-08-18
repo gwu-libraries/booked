@@ -1,0 +1,6 @@
+#cached PHP
+tpl_c
+
+#config files
+config/config.php
+plugins/Authentication/Shibboleth/Shibboleth.config.php
