@@ -120,7 +120,8 @@ class LoginPresenter
 	{
 		$resources = Resources::GetInstance();
 
-		$languageCode = $this->_page->GetRequestedLanguage();
+		//$languageCode = $this->_page->GetRequestedLanguage();
+		$languageCode = "en_us";
 
 		if ($resources->SetLanguage($languageCode))
 		{
