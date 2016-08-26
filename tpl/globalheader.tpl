@@ -95,7 +95,7 @@ along with Booked Scheduler.  If not, see <http://www.gnu.org/licenses/>.
 					{if $LoggedIn}
 						<li class="menubaritem first"><a
 									href="{$Path}{Pages::DASHBOARD}">{translate key="Dashboard"}</a></li>
-					<!--	<li class="menubaritem"><a href="{$Path}{Pages::PROFILE}">{translate key="MyAccount"}</a>
+						<li class="menubaritem"><a href="{$Path}{Pages::PROFILE}">{translate key="MyAccount"}</a>
 							<ul>
 								<li class="menuitem"><a href="{$Path}{Pages::PROFILE}">{translate key="Profile"}</a>
 								</li>
@@ -109,7 +109,7 @@ along with Booked Scheduler.  If not, see <http://www.gnu.org/licenses/>.
 											href="{$Path}{Pages::PARTICIPATION}">{translate key="OpenInvitations"}</a>
 									</li>{/if}
 							</ul>
-						</li>-->
+						</li>
 						<li class="menubaritem"><a href="{$Path}{Pages::SCHEDULE}">{translate key="Schedule"}</a>
 							<ul>
 								<li class="menuitem"><a href="{$Path}{Pages::SCHEDULE}">{translate key="Bookings"}</a>
@@ -251,7 +251,7 @@ along with Booked Scheduler.  If not, see <http://www.gnu.org/licenses/>.
 							{if $CanViewAdmin}
 								<li><a href="{$Path}help.php?ht=admin">{translate key=Administration}</a></li>
 							{/if}
-							<li><a href="{$Path}help.php?ht=about">{translate key=About}</a></li>
+							<!--<li><a href="{$Path}help.php?ht=about">{translate key=About}</a></li>-->
 						</ul>
 					</li>
 				</ul>
