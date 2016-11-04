@@ -298,20 +298,23 @@ along with Booked Scheduler.  If not, see <http://www.gnu.org/licenses/>.
 			// Create some table clones in order to have sticky rows
 			$("table.reservations").each(function ()
 			{
-				var originalTableWidth = $(this).outerWidth();
-				$(this).clone().addClass("tableClone").appendTo($(this).parent()).width(originalTableWidth).hide();
+				$(this).clone().addClass("tableClone").hide().insertAfter($(this));
 
 				var tableClone = $(this).next();
+				if (tableClone.attr("width") == "100%") {
+					tableClone.width($(this).outerWidth() - 1); // 1px too wide in IE/FF, 1px too narrow in Chrome
+				}
 				var firstCell = tableClone.find("td").first();
 				if (firstCell.text() == "\xa0") { // == &nbsp;
 					firstCell.css("background-color", "white");
+					firstCell.width($(this).find("td").first().outerWidth() - 1);
 				}
 				var sliceQuantity = 1;
 				var rowSpans = firstCell.attr("rowspan");
-				if (rowSpans != undefined) { 
+				if (rowSpans != undefined) {
 					sliceQuantity = rowSpans;
 				}
-				// don't display the non-header rows (though they seem to need to exist for widths to align)
+				// don't display the non-header rows (though they seem to need to exist for cell widths to align)
 				tableClone.find("tr").slice(sliceQuantity).hide();
 
 			});
