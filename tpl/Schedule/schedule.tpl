@@ -307,7 +307,7 @@ along with Booked Scheduler.  If not, see <http://www.gnu.org/licenses/>.
 				var firstCell = tableClone.find("td").first();
 				if (firstCell.text() == "\xa0") { // == &nbsp;
 					firstCell.css("background-color", "white");
-					firstCell.width($(this).find("td").first().outerWidth() - 1);
+					firstCell.append("<div style='width: " + ($(this).find("td").first().outerWidth() - 1) + "px;'/>");
 				}
 				var sliceQuantity = 1;
 				var rowSpans = firstCell.attr("rowspan");
