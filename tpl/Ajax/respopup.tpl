@@ -36,6 +36,7 @@ along with Booked Scheduler.  If not, see <http://www.gnu.org/licenses/>.
 
 	{capture "title"}
 	{if !$hideDetails}
+		{* Changed to remove "(no title)" output *}
 		{if $title neq ''}<div class="title">{$title}</div>{/if}
 	{/if}
 	{/capture}
@@ -52,8 +53,13 @@ along with Booked Scheduler.  If not, see <http://www.gnu.org/licenses/>.
 	{/capture}
 	{$formatter->Add('resources', $smarty.capture.resources)}
 
+	{* Removed "Participants" output *}
+
+	{* Removed "Accessories" output *}
+
 	{capture "description"}
 	{if !$hideDetails}
+		{* Changed to remove "(no description)" output *}
 		{if $summary neq ''}<div class="summary">{$summary|truncate:300:"..."|nl2br}</div>{/if}
 	{/if}
 	{/capture}
