@@ -36,7 +36,8 @@ along with Booked Scheduler.  If not, see <http://www.gnu.org/licenses/>.
 
 	{capture "title"}
 	{if !$hideDetails}
-		<div class="title">{if $title neq ''}{$title}{else}{translate key=NoTitleLabel}{/if}</div>
+		{* Changed to remove "(no title)" output *}
+		{if $title neq ''}<div class="title">{$title}</div>{/if}
 	{/if}
 	{/capture}
 	{$formatter->Add('title', $smarty.capture.title)}
@@ -52,37 +53,14 @@ along with Booked Scheduler.  If not, see <http://www.gnu.org/licenses/>.
 	{/capture}
 	{$formatter->Add('resources', $smarty.capture.resources)}
 
-	{capture "participants"}
-	{if !$hideUserInfo && !$hideDetails}
-	<div class="users">
-	{translate key="Participants"} ({$participants|@count}):
-	{foreach from=$participants item=user name=participant_loop}
-		{if !$user->IsOwner()}
-			{fullname first=$user->FirstName last=$user->LastName}
-		{/if}
-		{if !$smarty.foreach.participant_loop.last}, {/if}
-	{/foreach}
-	</div>
-	{/if}
-	{/capture}
-	{$formatter->Add('participants', $smarty.capture.participants)}
+	{* Removed "Participants" output *}
 
-	{capture "accessories"}
-	{if !$hideDetails}
-		<div class="accessories">
-		{translate key="Accessories"} ({$accessories|@count}):
-		{foreach from=$accessories item=accessory name=accessory_loop}
-			{$accessory->Name} ({$accessory->QuantityReserved})
-			{if !$smarty.foreach.accessory_loop.last}, {/if}
-		{/foreach}
-		</div>
-	{/if}
-	{/capture}
-	{$formatter->Add('accessories', $smarty.capture.accessories)}
+	{* Removed "Accessories" output *}
 
 	{capture "description"}
 	{if !$hideDetails}
-		<div class="summary">{if $summary neq ''}{$summary|truncate:300:"..."|nl2br}{else}{translate key=NoDescriptionLabel}{/if}</div>
+		{* Changed to remove "(no description)" output *}
+		{if $summary neq ''}<div class="summary">{$summary|truncate:300:"..."|nl2br}</div>{/if}
 	{/if}
 	{/capture}
 	{$formatter->Add('description', $smarty.capture.description)}
