@@ -307,7 +307,7 @@ along with Booked Scheduler.  If not, see <http://www.gnu.org/licenses/>.
 				var firstCell = tableClone.find("td").first();
 				if (firstCell.text() == "\xa0") { // == &nbsp;
 					firstCell.css("background-color", "white");
-					firstCell.append("<div style='width: " + ($(this).find("td").first().outerWidth() - 1) + "px;'/>");
+					firstCell.append("<div style='width: " + ($(this).find("td").first().outerWidth() - 1) + "px;' class='empty-cell-width-hack'/>");
 				}
 				var sliceQuantity = 1;
 				var rowSpans = firstCell.attr("rowspan");
@@ -325,6 +325,17 @@ along with Booked Scheduler.  If not, see <http://www.gnu.org/licenses/>.
 			$(".tableClone td.resdate[colspan]").css("width", "auto");
 		});
 		
+		$(window).resize(function () {
+			$("table.reservations").not(".tableClone").each(function ()
+			{
+				var tableClone = $(this).next();
+				if (tableClone.attr("width") == "100%") {
+					tableClone.width($(this).outerWidth() - 1); // 1px too wide in IE/FF, 1px too narrow in Chrome
+				}
+				tableClone.find(".empty-cell-width-hack").width($(this).find("td").first().outerWidth() - 1);
+			});
+		});
+
 		$(window).scroll(function ()
 		{
 			$(".reservations").not(".tableClone").each(function()
