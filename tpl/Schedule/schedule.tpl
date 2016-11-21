@@ -294,7 +294,61 @@ along with Booked Scheduler.  If not, see <http://www.gnu.org/licenses/>.
 
 			var schedule = new Schedule(scheduleOpts, {$ResourceGroupsAsJson});
 			schedule.init();
+
+			// Create some table clones in order to have sticky rows
+			$("table.reservations").each(function ()
+			{
+				$(this).clone().addClass("tableClone").hide().insertAfter($(this));
+
+				var tableClone = $(this).next();
+				if (tableClone.attr("width") == "100%") {
+					tableClone.width($(this).outerWidth() - 1); // 1px too wide in IE/FF, 1px too narrow in Chrome
+				}
+				var firstCell = tableClone.find("td").first();
+				if (firstCell.text() == "\xa0") { // == &nbsp;
+					firstCell.css("background-color", "white");
+					firstCell.append("<div style='width: " + ($(this).find("td").first().outerWidth() - 1) + "px;' class='empty-cell-width-hack'/>");
+				}
+				var sliceQuantity = 1;
+				var rowSpans = firstCell.attr("rowspan");
+				if (rowSpans != undefined) {
+					sliceQuantity = rowSpans;
+				}
+				// don't display the non-header rows (though they seem to need to exist for cell widths to align)
+				tableClone.find("tr").slice(sliceQuantity).hide();
+
+			});
+			$(".tableClone").css({
+				position: 'fixed',
+				top: '0',
+			});
+			$(".tableClone td.resdate[colspan]").css("width", "auto");
 		});
+		
+		$(window).resize(function () {
+			$("table.reservations").not(".tableClone").each(function ()
+			{
+				var tableClone = $(this).next();
+				if (tableClone.attr("width") == "100%") {
+					tableClone.width($(this).outerWidth() - 1); // 1px too wide in IE/FF, 1px too narrow in Chrome
+				}
+				tableClone.find(".empty-cell-width-hack").width($(this).find("td").first().outerWidth() - 1);
+			});
+		});
+
+		$(window).scroll(function ()
+		{
+			$(".reservations").not(".tableClone").each(function()
+			{
+				var naturalRowTop = $(this).offset().top;
+				if (naturalRowTop < $(window).scrollTop()) {
+					$(this).next(".tableClone").show();
+				} else {
+					$(this).next(".tableClone").hide();
+				}
+			});
+		});
+
 
 	</script>
 {/block}
